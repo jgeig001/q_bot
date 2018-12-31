@@ -1,9 +1,6 @@
 import sys
 import telepot
-from telepot.loop import MessageLoop
-from telepot.delegate import per_chat_id, create_open, pave_event_space, per_callback_query_origin
 from telepot.exception import TelegramError
-from time import sleep
 from question_manager import Question_Manager
 from Handler import Handler
 from MetaData import MetaData
@@ -138,6 +135,10 @@ def cleanUp():
     q_man.saveValues()
 
 
+def always_use_new(req, **user_kw):
+    return None
+
+
 if __name__ == "__main__":
 
     bot = telepot.Bot(TOKEN)
@@ -151,6 +152,10 @@ if __name__ == "__main__":
     telepot.api._pools = {
         'default': urllib3.PoolManager(num_pools=3, maxsize=10, retries=6, timeout=30),
     }
+    telepot.api._which_pool = always_use_new
+
+    # first Question
+    ask_randomQuestion()
 
     try:
         bot.message_loop({'chat': on_chat_message,
