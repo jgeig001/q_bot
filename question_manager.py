@@ -30,7 +30,6 @@ class Question_Manager(object):
         """ generiert den nächsten Index(beliebig komlexes Verfahren) """
         # μ: Erwartungswert
         # σ: Standardabweichung
-        print(len(self.qna_lis))
         μ = (len(self.qna_lis)/2) - 1
         σ = len(self.qna_lis) * (1/6)
         i = round(gauss(μ, σ))
