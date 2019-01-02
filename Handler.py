@@ -234,4 +234,6 @@ class CycleHandler(CommandHandler):
             self._meta.set_question_frequency(minutes=num)
             self._bot.sendMessage(self._user, "Alles klar!\nIch frage jetzt alle {} min. ".format(num))
         except (ValueError, IndexError):
-            self._bot.sendMessage(self._user, "Gibt eine Zahl an: z.B. /cycle 3.14")
+            s = "aktuell: {}min\nWillst du sie ändern gibt eine Zahl an: z.B. /cycle 3.14".format(
+                self._meta.question_frequency_sec / 60)
+            self._bot.sendMessage(self._user, s)

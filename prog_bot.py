@@ -89,8 +89,8 @@ def on_chat_message(msg):
         delay = meta.question_frequency_sec()
         any_data = None  # beliebige Daten in dict speichern, kann in Callback_fkt(dict) abgerufen werden
         event = bot.scheduler.event_later(delay, {'_question_alarm': any_data})
-    if len(bot.scheduler._eventq) > 2:
-        raise TelegramError("To many(>2) Events in Queue?!", None, None)
+    if len(bot.scheduler._eventq) > 5:
+        raise RuntimeWarning("To many(>5) Events in Queue?!")
 
 
 def on_callback_query(msg):

@@ -28,8 +28,16 @@ class Question_Manager(object):
 
     def _nextIndex(self):
         """ generiert den nächsten Index(beliebig komlexes Verfahren) """
-        μ, σ = len(self.qna_lis)/2, len(self.qna_lis)/4
-        self.cur_index = round(gauss(μ, σ))
+        # μ: Erwartungswert
+        # σ: Standardabweichung
+        print(len(self.qna_lis))
+        μ = (len(self.qna_lis)/2) - 1
+        σ = len(self.qna_lis) * (1/6)
+        i = round(gauss(μ, σ))
+        if i >= len(self.qna_lis) or i < 0:
+            self.cur_index = len(self.qna_lis)
+        else:
+            self.cur_index = i
         return self.cur_index
         #return (self.cur_index + randint(1, len(self.qna_lis) - 2)) % (len(self.qna_lis)) #nice, but DEPRECATED
 
@@ -37,7 +45,7 @@ class Question_Manager(object):
         """ :return nächste Frage(QnA) """
         self.fail_counter = 0
         self.state = states.STILL_OPEN
-        return self.bell_curve()[self._nextIndex()] # TODO: IndexOutOfRange verhindern!
+        return self.bell_curve()[self._nextIndex()]
 
     def bell_curve(self):
         lis = sorted(self.qna_lis, key=lambda x: x.wrong / (x.answered + 1))
