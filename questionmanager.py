@@ -11,11 +11,11 @@ positive = ["Yeah, richtig!", "👍", "👌", "Jajaja", "Das ist richtig", "True
 negative = ["Nope", "Falsch", "False❌", "Ne", "Wrong", "❌"]
 
 
-class Question_Manager(object):
+class QuestionManager(object):
     """ Verwaltet Fragenkatalog und Zustand """
     def __init__(self, jsonfile):
         self.qna_lis = []
-        self.cur_index = 0
+        self.cur_QnA = None
         self.path = jsonfile
         self.state = states.NOTHING_ASKED
         self.fail_counter = 0
@@ -26,33 +26,33 @@ class Question_Manager(object):
                 obj = QnA(key, value["answer"], value["regex"], value["answered"], value["right"], value["wrong"])
                 self.qna_lis.append(obj)
 
+    def _bell_curve(self):
+        """
+        generiert eine Glockenkurve, sortiert nach der Falschheit(anz falsch beantwortet / anz beantwortet) der Fragen
+        """
+        lis = sorted(self.qna_lis, key=lambda x: x.wrong / (x.answered + 1))  # (+1) to avoid ZeroDivisionError
+        return lis[len(lis) % 2::2] + lis[::-2]
+
     def _nextIndex(self):
         """ generiert den nächsten Index(beliebig komlexes Verfahren) """
         # μ: Erwartungswert
-        # σ: Standardabweichung
         μ = (len(self.qna_lis)/2) - 1
+        # σ: Standardabweichung
         σ = len(self.qna_lis) * (1/6)
-        i = round(gauss(μ, σ))
-        if i >= len(self.qna_lis) or i < 0:
-            self.cur_index = len(self.qna_lis)
-        else:
-            self.cur_index = i
-        return self.cur_index
-        #return (self.cur_index + randint(1, len(self.qna_lis) - 2)) % (len(self.qna_lis)) #nice, but DEPRECATED
+        index = int(gauss(μ, σ))
+        same_again = self.cur_QnA == self._bell_curve()[index]
+        out_of_bounds = index >= len(self.qna_lis) or index < 0
+        if out_of_bounds or same_again:
+            # random Index, without Normalverteilung, but never the same Question again
+            index = (self.qna_lis.index(self.cur_QnA) + randint(1, len(self.qna_lis) - 2)) % (len(self.qna_lis))
+        return index
 
     def _nextQnA(self):
         """ :return nächste Frage(QnA) """
         self.fail_counter = 0
         self.state = states.STILL_OPEN
-        return self.bell_curve()[self._nextIndex()]
-
-    def bell_curve(self):
-        lis = sorted(self.qna_lis, key=lambda x: x.wrong / (x.answered + 1))
-        return lis[len(lis) % 2::2] + lis[::-2]
-
-    def _curQnA(self):
-        """ :return die aktuelle Frage(QnA) """
-        return self.bell_curve()[self.cur_index]
+        self.cur_QnA = self._bell_curve()[self._nextIndex()]
+        return self.cur_QnA
 
     def next_question(self):
         """ :return nächste Frage(string) """
@@ -60,10 +60,11 @@ class Question_Manager(object):
 
     def cur_question(self):
         """ :return aktuelle Frage(string) """
-        return self._curQnA().question
+        return self.cur_QnA.question
 
     def cur_answer(self):
-        return self._curQnA().answer
+        """ :return aktuelle Antwort(string) """
+        return self.cur_QnA.answer
 
     def evalQ(self, given_answer):
         """
@@ -75,7 +76,7 @@ class Question_Manager(object):
                 output_string: wenn richtig, einen züfalligen string aus global positive,
                                sonst einen zufälligen string aus global negative
         """
-        correct = self._curQnA().evaluate(given_answer)
+        correct = self.cur_QnA.evaluate(given_answer)
         if correct:
             self.state = states.ANSWERED_CORRECTLY
             return correct, positive[randint(0, len(positive)-1)]
@@ -147,8 +148,8 @@ class QnA(object):
         return False
 
     def __str__(self):
-        return "{} : [{}, {}, {}, {}, {}]".format(self.question, self.answer, self.regex, self.answered, self.right,
-                                                  self.wrong)
+        return "q:{} : [a:{}, re:{}, a:{}, r:{}, w:{}]".format(self.question, self.answer, self.regex, self.answered,
+                                                               self.right, self.wrong)
 
     def __repr__(self):
         return self.__str__()

@@ -1,7 +1,7 @@
 import sys
 import telepot
-from telepot.exception import TelegramError
-from question_manager import Question_Manager
+from telepot.exception import TelegramError, EventNotFound
+from questionmanager import QuestionManager
 from Handler import Handler
 from MetaData import MetaData
 # hack
@@ -16,12 +16,12 @@ Skript starten:
     pyhon3 prog_bot.py _TOKEN_ _USER_ _SOURCE_JSON_
 
 @startdate: 10.12.2018
-@version: 0.95
+@version: 0.96
 @author: Jonathan Geiger    
 """
 
 _verbose = True
-_version = 0.95
+_version = 0.96
 
 #args
 TOKEN = sys.argv[1]
@@ -30,7 +30,7 @@ SOURCE_JSON = sys.argv[3]
 BUGREPORT_JSON = "bugreport.json"
 
 # global variables
-q_man = Question_Manager(jsonfile=SOURCE_JSON)
+q_man = QuestionManager(jsonfile=SOURCE_JSON)
 meta = MetaData(TOKEN, USER, SOURCE_JSON, BUGREPORT_JSON)
 bot = None
 myHandler = None
@@ -40,17 +40,25 @@ event = None
 def on_question_alarm(dict):
     """ function get called regularly by scheduler """
     print("on_question_alarm(event):", dict)
-    print("type(event)", type(dict))
     print("queue:", bot.scheduler._eventq)
     print("len(queue)", len(bot.scheduler._eventq))
-    try:
-        bot.deleteMessage(msg_identifier=meta.msg_id_last_InlineKeyboard())
-    except TelegramError:
-        pass
-    if not meta.sleeps():
-        if not q_man.state_STILL_OPEN():
-            ask_randomQuestion()
-        print("#", bot.scheduler)
+    global event
+    if meta.is_night():
+        try:
+            if event: bot.scheduler.cancel(event)
+        except EventNotFound:
+            pass
+        delay = meta.question_frequency_sec()
+        event = bot.scheduler.event_later(delay, {'_question_alarm': None})
+    else:
+        try:
+            bot.deleteMessage(msg_identifier=meta.msg_id_last_InlineKeyboard())
+        except TelegramError:
+            pass
+        if not meta.sleeps():
+            if not q_man.state_STILL_OPEN():
+                bot.sendMessage(USER, q_man.next_question())
+            print("#", bot.scheduler)
 
 
 def on_chat_message(msg):
@@ -60,8 +68,7 @@ def on_chat_message(msg):
         content = msg['text']
     except BaseException:
         return
-    if _verbose: print("input: " + content); print("msg:", msg)
-
+    if _verbose: print("input: " + content)
     # try to delete the last InlineKeyboard
     try:
         bot.deleteMessage(msg_identifier=meta.msg_id_last_InlineKeyboard())
@@ -71,26 +78,27 @@ def on_chat_message(msg):
     # freq merken
     tmp = meta.question_frequency_sec()
 
-    myHandler.handle(content)
+    set_timer = myHandler.handle(content)
 
     # freq auf Änderung prüfen
     if tmp != meta.question_frequency_sec():
         # cur timer löschen und neuen mit neuer freq stellen
         try:
             if event: bot.scheduler.cancel(event)
-        except:
+        except EventNotFound:
             pass
         delay = meta.question_frequency_sec()
         any_data = None  # beliebige Daten im Event speichern, kann in Callback_fkt(event) abgerufen werden
         event = bot.scheduler.event_later(delay, {'_question_alarm': any_data})
 
     # neuern Timer stellen, wenn Frage richtig beantwortet
-    if not q_man.state_STILL_OPEN():
+    if set_timer:
         delay = meta.question_frequency_sec()
         any_data = None  # beliebige Daten in dict speichern, kann in Callback_fkt(dict) abgerufen werden
         event = bot.scheduler.event_later(delay, {'_question_alarm': any_data})
-    if len(bot.scheduler._eventq) > 5:
-        raise RuntimeWarning("To many(>5) Events in Queue?!")
+        if _verbose: print("set_timer({})".format(delay))
+    if len(bot.scheduler._eventq) > 3:
+        raise RuntimeWarning("To many(>3) Events in Queue?!")
 
 
 def on_callback_query(msg):
@@ -118,11 +126,6 @@ def on_callback_query(msg):
         except TelegramError:
             pass
 
-
-
-def ask_randomQuestion():
-    """ Fragt eine zufaellig ausgewählte Frage """
-    bot.sendMessage(USER, q_man.next_question())
 
 
 def cleanUp():
@@ -155,7 +158,7 @@ if __name__ == "__main__":
     telepot.api._which_pool = always_use_new
 
     # first Question
-    ask_randomQuestion()
+    bot.sendMessage(USER, q_man.next_question())
 
     try:
         bot.message_loop({'chat': on_chat_message,
@@ -167,21 +170,3 @@ if __name__ == "__main__":
     finally:
         cleanUp()
 
-
-    # DEPRECATED
-    # lifecycle: regelmaßig fragen...
-    """while True:
-        try:
-            # regelmäßiges Fragen zwischen 22:45 und 7:30 Uhr.
-            if True:# or time(22, 45) > datetime.now().time() > time(7, 30):
-                if not q_man.state_STILL_OPEN() and not bot_sleeps:
-                    ask_randomQuestion()
-                sleep(60 * 0.5)
-        except KeyboardInterrupt as keyint:
-            print("KeyboardInterrupt:", keyint)
-            pass
-        except BaseException as e:
-            print("#exception:\n", e)
-        finally:
-            cleanUp()
-            break"""

@@ -1,3 +1,5 @@
+from datetime import datetime, time
+
 """
 "Nehmen und weitergeben."
 Speichert den Zustand des Bots.
@@ -39,8 +41,13 @@ class MetaData(object):
         self._question_frequency_min = minutes
 
     def sleeps(self):
-        """ :return: True if, @ sleep, else False(awake) """
+        """ :return: True if, at sleep, else False(awake) """
         return self._sleeps
+
+    def is_night(self):
+        if time(23, 00) > datetime.now().time() > time(6, 30):
+            return False
+        return True
 
     def fall_asleep(self):
         self._sleeps = True

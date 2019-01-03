@@ -4,7 +4,6 @@ from telepot import message_identifier
 from telepot.namedtuple import ReplyKeyboardMarkup
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 from datetime import datetime
-from MetaData import MetaData
 
 
 """
@@ -15,8 +14,7 @@ Hier wird sich um das Abarbeiten der eingehenden Nachrichten gekümmert.
 class Handler(object):
     def __init__(self, bot, question_manager, meta_data):
         """
-        :type bot: telepot.DelegatorBot
-        :param user: userID
+        :type bot: telepot.Bot
         :type question_manager: QuestionManager
         :param meta_data: MetaDaten-Obj des Bots
         """
@@ -37,7 +35,10 @@ class Handler(object):
                              'cycle': CycleHandler(self._bot, self._user, self._meta)}
 
     def handle(self, msg):
-        """ :type msg: reiner Nachrichten-String(z.B. '/cmd foo1 foo2') """
+        """
+        :type msg: reiner Nachrichten-String(z.B. '/cmd foo1 foo2')
+        :return True, wenn frage mit msg richtig beantwortet wurde, sonst False
+        """
 
         # when I SLEEP...(zzz)
         if self._meta.sleeps():
@@ -71,6 +72,7 @@ class Handler(object):
                 # richtige Antwort
                 if correct:
                     self._bot.sendMessage(self._user, output)
+                    return True
                 else:
                     # fasche Antwort
                     self._bot.sendMessage(self._user, output)
@@ -84,6 +86,9 @@ class Handler(object):
                         sent = self._bot.sendMessage(self._user, text="Willst du spicken?", reply_markup=markup)
                         self._meta.set_msg_id_last_InlineKeyboard(msg_id=message_identifier(sent))
                         self._q_man.reset_fail_counter()
+            else:
+                print("ignore input({})".format(msg))
+        return False
 
 
 
@@ -213,6 +218,7 @@ class BugreportHandler(CommandHandler):
                 file.seek(0)
                 json.dump(data, file)
                 file.truncate()
+            self._bot.sendMessage(self._user, "Danke, ich kümmere mich drum.😊")
 
 
 class CreateHandler(CommandHandler):

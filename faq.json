@@ -1,1 +1,219 @@
-{"Wie kann ich in Python eine Liste(lst) mit n Elementen umdrehen": {"regex": "(?=.*lst[[]::-1[]])", "answer": "lst[::-1]", "answered": 13, "right": 6, "wrong": 7}, "Wie bekommt man eine Kopie einer Liste(lst)?": {"regex": "(?=.*lst[[]:[]])", "answer": "lst[:]", "answered": 26, "right": 11, "wrong": 15}, "Mit welcher C-Fkt kann man 'Strings' anhand von Trennzeichen zerteilen?": {"regex": "strtok[(][)]", "answer": "strtok()", "answered": 33, "right": 12, "wrong": 21}, "Welche Programmiersprache ist rel. systemnah?": {"regex": "C|c", "answer": "C", "answered": 26, "right": 15, "wrong": 11}, "Wie bekomme ich den Index von c='c' im String s='abcdefg'?": {"regex": "s[.]find[(]c[)]", "answer": "s.find(c)", "answered": 2, "right": 2, "wrong": 0}, "Wie bekomme ich in C den uppercase vom char c?": {"regex": "toupper[(]c[)]", "answer": "toupper(c)", "answered": 5, "right": 3, "wrong": 2}, "Wie kann man (in C) a->attr noch ausdr\u00fccken?": {"regex": "[(][*]a[)][.]attr", "answer": "(*a).attr", "answered": 5, "right": 2, "wrong": 0}, "Wie kann ich die Werte der Variablen a und b vertauschen?(Python)": {"regex": "a(\\s)?,(\\s)?b(\\s)?=(\\s)?b(\\s)?,(\\s)?a", "answer": "a,b = b,a", "answered": 20, "right": 7, "wrong": 13}, "Wie rufe ich den init() der Superklasse auf?(Python)": {"regex": "(?=.*super[(][)][.]__init__[(][)])", "answer": "super().__init__()", "answered": 16, "right": 5, "wrong": 11}, "Was macht die Funktion all()?(Python) returns...": {"regex": "True, wenn alle True, sonst False", "answer": "True, wenn alle True, sonst False", "answered": 30, "right": 6, "wrong": 24}, "Wie kann ich pr\u00fcfen, ob 'obj' ein Iterable ist?(Python)": {"regex": "(?=.*isinstance[(]obj,(\\s)?collection[.]Iterable[)])", "answer": "isinstance(obj, collection.Iterable)", "answered": 22, "right": 7, "wrong": 15}, "Wie bekomme ich eine range von 100,99,98,...,2,1 ?(Python)": {"regex": "range[(]100,(\\s)?0,(\\s)?-1[)]", "answer": "range(100, 0, -1)", "answered": 0, "right": 0, "wrong": 0}, "Mit welchen builtIn-Funktionen kan man in Python Maxima und Minima bestimmen?": {"regex": "(?=.*max[(][)])(?=.*min[(][)])", "answer": "max() und min()", "answered": 17, "right": 6, "wrong": 11}, "Wie kann man (in C) v[n] noch ausdr\u00fccken?": {"regex": "[*][(]v[+]n[)]", "answer": "*(v+n)", "answered": 0, "right": 0, "wrong": 0}, "Wie bekomme ich aus s = 'Foo' -> 'FOO'(in Python)": {"regex": "s[.]upper[(][)]", "answer": "s.upper()", "answered": 11, "right": 7, "wrong": 4}, "How to read two lines at once in Python? with open('./dat.txt') as file:\n": {"regex": "while True:\\s+[\\w]*+ = file[.]readline()\\s+[^\\2]+ = file[.]readline()\\s+if not \\2|\\4: break", "answer": "while True:\\s+[\\w]*+ = file.readline()\\s+[^\\2]+ = file.readline()\\s+if not \\2|\\4: break", "answered": 14, "right": 0, "wrong": 0}, "Wie kann man mit char *ptr einen 'String' durchlaufen?": {"regex": "while[(][*]ptr[)](\\s)?{(\\s)?ptr[+]{2};(\\s)?}", "answer": "while(*ptr) {ptr++;}", "answered": 25, "right": 8, "wrong": 17}, "Welches package bietet toll Funktionen zum Iterieren an?": {"regex": "itertools", "answer": "itertools", "answered": 6, "right": 4, "wrong": 2}, "Wie l\u00f6sche ich das n-te Element einer Liste(lst)?()Python": {"regex": "del lst[[]n[]]", "answer": "del lst[n]", "answered": 20, "right": 7, "wrong": 13}, "Was ist die beste Programmiersprache der Welt?": {"regex": "(P|p)(Y|y)(T|t)(H|h)(O|o)(N|n)", "answer": "Python", "answered": 16, "right": 9, "wrong": 7}, "Wie bekomme ich das erste und letzte Element einer Liste(lst)?": {"regex": "lst[[][:]{2}len[(]lst[)]-1[]]", "answer": "lst[::len(lst)-1]", "answered": 2, "right": 2, "wrong": 0}, "Wie kann man das kartesische Produkt(allesXallem) erzeugen(2Varianten m\u00f6glich)? -> lis1 und lis2": {"regex": "([[][(]a,b[)] for a in lis1 for b in lis2[]])|(itertools.product[(]lis1, lis2[)])", "answer": "[(a,b) for a in lis1 for b in lis2]\noder\nitertools.product(lis1, lis2)", "answered": 6, "right": 3, "wrong": 3}, "Wie splitte ich einen String(s) nach 2(multiple) Speratoren, z.B.  -  und  :  ?": {"regex": "re[.]split[(]'-',(\\s)?':',(\\s)?s[)]", "answer": "re.split('-', ':', s)", "answered": 6, "right": 3, "wrong": 3}, "Wie h\u00e4nge ich a an lst vorne an?(Python)": {"regex": "lst(\\s)?=(\\s)?[[]a[]](\\s)?[+](\\s)?lst", "answer": "lst = [a] + lst", "answered": 26, "right": 7, "wrong": 19}, "Wie bekomme ich x=3 in die Mitte von lst[1,2,4,5] eingefuegt?(Python)": {"regex": "lst[.]insert[(]1,(\\s)?x[)]", "answer": "lst.insert(1, x)", "answered": 24, "right": 9, "wrong": 15}, "Mit welcher C-Fkt kann man nach dem letzten Auftreten eines character in einem 'String' suchen?": {"regex": "strrchr[(][)]", "answer": "strrchr()", "answered": 30, "right": 10, "wrong": 20}, "Welche 3 Haupt-Funktionen werden in Python f\u00fcr RegEx angeboten": {"regex": "(?=.*match[(][)])(?=.*search[(][)])(?=.*findall[(][)])", "answer": "match(), search(), findall()", "answered": 28, "right": 10, "wrong": 18}, "Wie bekomme ich den Index von 'two' in lst['one', 'two', 'three'](Python)": {"regex": "(lst[.]index[(]'two'[)])|(lst[.]find[(]'two'[)])", "answer": "lst.index('two')", "answered": 25, "right": 7, "wrong": 18}, "Wie bekomme ich den Datentyp von x?(Python)": {"regex": "type[(]x[)]", "answer": "type(x)", "answered": 24, "right": 7, "wrong": 17}, "Wie bekomme ich aus s = 'Foo' -> 'foo'(in Python)": {"regex": "s[.]lower[(][)]", "answer": "s.lower()", "answered": 44, "right": 12, "wrong": 32}, "Wie bekome ich aus lst=[1,2,3,3,4,1,5,6,7,6] alle doppelten Elemente raus?": {"regex": "list[(]set[(]lst[)][)]", "answer": "list(set(lst))", "answered": 8, "right": 6, "wrong": 2}}
+{
+  "Wie l\u00f6sche ich das n-te Element einer Liste(lst)?()Python": {
+    "wrong": 13,
+    "regex": "del lst[[]n[]]",
+    "answer": "del lst[n]",
+    "right": 8,
+    "answered": 21
+  },
+  "Was macht die Funktion all()?(Python) returns...": {
+    "wrong": 24,
+    "regex": "True, wenn alle True, sonst False",
+    "answer": "True, wenn alle True, sonst False",
+    "right": 7,
+    "answered": 31
+  },
+  "Welches package bietet toll Funktionen zum Iterieren an?": {
+    "wrong": 2,
+    "regex": "itertools",
+    "answer": "itertools",
+    "right": 4,
+    "answered": 6
+  },
+  "Wie bekome ich aus lst=[1,2,3,3,4,1,5,6,7,6] alle doppelten Elemente raus?": {
+    "wrong": 2,
+    "regex": "list[(]set[(]lst[)][)]",
+    "answer": "list(set(lst))",
+    "right": 6,
+    "answered": 8
+  },
+  "Wie bekomme ich aus s = 'Foo' -> 'FOO'(in Python)": {
+    "wrong": 4,
+    "regex": "s[.]upper[(][)]",
+    "answer": "s.upper()",
+    "right": 7,
+    "answered": 11
+  },
+  "Wie rufe ich den init() der Superklasse auf?(Python)": {
+    "wrong": 11,
+    "regex": "(?=.*super[(][)][.]__init__[(][)])",
+    "answer": "super().__init__()",
+    "right": 5,
+    "answered": 16
+  },
+  "Mit welcher C-Fkt kann man nach dem letzten Auftreten eines character in einem 'String' suchen?": {
+    "wrong": 20,
+    "regex": "strrchr[(][)]",
+    "answer": "strrchr()",
+    "right": 10,
+    "answered": 30
+  },
+  "Wie kann man (in C) a->attr noch ausdr\u00fccken?": {
+    "wrong": 0,
+    "regex": "[(][*]a[)][.]attr",
+    "answer": "(*a).attr",
+    "right": 2,
+    "answered": 5
+  },
+  "Wie bekomme ich das erste und letzte Element einer Liste(lst)?": {
+    "wrong": 0,
+    "regex": "lst[[][:]{2}len[(]lst[)]-1[]]",
+    "answer": "lst[::len(lst)-1]",
+    "right": 2,
+    "answered": 2
+  },
+  "Wie bekomme ich den Datentyp von x?(Python)": {
+    "wrong": 17,
+    "regex": "type[(]x[)]",
+    "answer": "type(x)",
+    "right": 8,
+    "answered": 25
+  },
+  "Wie h\u00e4nge ich a an lst vorne an?(Python)": {
+    "wrong": 19,
+    "regex": "lst(\\s)?=(\\s)?[[]a[]](\\s)?[+](\\s)?lst",
+    "answer": "lst = [a] + lst",
+    "right": 7,
+    "answered": 26
+  },
+  "Wie splitte ich einen String(s) nach 2(multiple) Speratoren, z.B.  -  und  :  ?": {
+    "wrong": 3,
+    "regex": "re[.]split[(]'-',(\\s)?':',(\\s)?s[)]",
+    "answer": "re.split('-', ':', s)",
+    "right": 3,
+    "answered": 6
+  },
+  "Wie kann ich in Python eine Liste(lst) mit n Elementen umdrehen": {
+    "wrong": 7,
+    "regex": "(?=.*lst[[]::-1[]])",
+    "answer": "lst[::-1]",
+    "right": 6,
+    "answered": 13
+  },
+  "Mit welchen builtIn-Funktionen kan man in Python Maxima und Minima bestimmen?": {
+    "wrong": 11,
+    "regex": "(?=.*max[(][)])(?=.*min[(][)])",
+    "answer": "max() und min()",
+    "right": 7,
+    "answered": 18
+  },
+  "Mit welcher C-Fkt kann man 'Strings' anhand von Trennzeichen zerteilen?": {
+    "wrong": 21,
+    "regex": "strtok[(][)]",
+    "answer": "strtok()",
+    "right": 12,
+    "answered": 33
+  },
+  "Wie bekomme ich in C den uppercase vom char c?": {
+    "wrong": 2,
+    "regex": "toupper[(]c[)]",
+    "answer": "toupper(c)",
+    "right": 3,
+    "answered": 5
+  },
+  "Was ist die beste Programmiersprache der Welt?": {
+    "wrong": 7,
+    "regex": "(P|p)(Y|y)(T|t)(H|h)(O|o)(N|n)",
+    "answer": "Python",
+    "right": 9,
+    "answered": 16
+  },
+  "How to read two lines at once in Python? with open('./dat.txt') as file:\n": {
+    "wrong": 0,
+    "regex": "while True:\\s+[\\w]*+ = file[.]readline()\\s+[^\\2]+ = file[.]readline()\\s+if not \\2|\\4: break",
+    "answer": "while True:\\s+[\\w]*+ = file.readline()\\s+[^\\2]+ = file.readline()\\s+if not \\2|\\4: break",
+    "right": 0,
+    "answered": 14
+  },
+  "Wie kann man (in C) v[n] noch ausdr\u00fccken?": {
+    "wrong": 0,
+    "regex": "[*][(]v[+]n[)]",
+    "answer": "*(v+n)",
+    "right": 1,
+    "answered": 1
+  },
+  "Wie bekomme ich den Index von c='c' im String s='abcdefg'?": {
+    "wrong": 0,
+    "regex": "s[.]find[(]c[)]",
+    "answer": "s.find(c)",
+    "right": 2,
+    "answered": 2
+  },
+  "Welche 3 Haupt-Funktionen werden in Python f\u00fcr RegEx angeboten": {
+    "wrong": 19,
+    "regex": "(?=.*match[(][)])(?=.*search[(][)])(?=.*findall[(][)])",
+    "answer": "match(), search(), findall()",
+    "right": 10,
+    "answered": 29
+  },
+  "Wie bekommt man eine Kopie einer Liste(lst)?": {
+    "wrong": 15,
+    "regex": "(?=.*lst[[]:[]])",
+    "answer": "lst[:]",
+    "right": 12,
+    "answered": 27
+  },
+  "Wie kann ich pr\u00fcfen, ob 'obj' ein Iterable ist?(Python)": {
+    "wrong": 15,
+    "regex": "(?=.*isinstance[(]obj,(\\s)?collection[.]Iterable[)])",
+    "answer": "isinstance(obj, collection.Iterable)",
+    "right": 7,
+    "answered": 22
+  },
+  "Wie bekomme ich den Index von 'two' in lst['one', 'two', 'three'](Python)": {
+    "wrong": 18,
+    "regex": "(lst[.]index[(]'two'[)])|(lst[.]find[(]'two'[)])",
+    "answer": "lst.index('two')",
+    "right": 9,
+    "answered": 27
+  },
+  "Wie kann man mit char *ptr einen 'String' durchlaufen?": {
+    "wrong": 17,
+    "regex": "while[(][*]ptr[)](\\s)?{(\\s)?ptr[+]{2};(\\s)?}",
+    "answer": "while(*ptr) {ptr++;}",
+    "right": 9,
+    "answered": 26
+  },
+  "Wie kann ich die Werte der Variablen a und b vertauschen?(Python)": {
+    "wrong": 13,
+    "regex": "a(\\s)?,(\\s)?b(\\s)?=(\\s)?b(\\s)?,(\\s)?a",
+    "answer": "a,b = b,a",
+    "right": 7,
+    "answered": 20
+  },
+  "Wie bekomme ich x=3 in die Mitte von lst[1,2,4,5] eingefuegt?(Python)": {
+    "wrong": 15,
+    "regex": "lst[.]insert[(]1,(\\s)?x[)]",
+    "answer": "lst.insert(1, x)",
+    "right": 9,
+    "answered": 24
+  },
+  "Wie bekomme ich eine range von 100,99,98,...,2,1 ?(Python)": {
+    "wrong": 0,
+    "regex": "range[(]100,(\\s)?0,(\\s)?-1[)]",
+    "answer": "range(100, 0, -1)",
+    "right": 0,
+    "answered": 0
+  },
+  "Wie bekomme ich aus s = 'Foo' -> 'foo'(in Python)": {
+    "wrong": 32,
+    "regex": "s[.]lower[(][)]",
+    "answer": "s.lower()",
+    "right": 14,
+    "answered": 46
+  },
+  "Wie kann man das kartesische Produkt(allesXallem) erzeugen(2Varianten m\u00f6glich)? lis1 und lis2 -> (a,b)-Tupel": {
+    "wrong": 3,
+    "regex": "([[][(]a,b[)] for a in lis1 for b in lis2[]])|(itertools.product[(]lis1, lis2[)])",
+    "answer": "[(a,b) for a in lis1 for b in lis2]\noder\nitertools.product(lis1, lis2)",
+    "right": 3,
+    "answered": 6
+  },
+  "Welche Programmiersprache ist rel. systemnah?": {
+    "wrong": 11,
+    "regex": "C|c",
+    "answer": "C",
+    "right": 15,
+    "answered": 26
+  }
+}
