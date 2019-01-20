@@ -126,6 +126,16 @@ class QuestionManager(object):
                 json.dump(data, jsonfile)
                 jsonfile.truncate()
 
+    def resetValues(self):
+        """ überschreibt im .json alle counter(answered, right, wrong) mit 0 """
+        with open(self.path, 'r+') as jsonfile:
+            data = json.load(jsonfile)
+            for obj in self.qna_lis:
+                key = obj.question
+                data[key]["answered"], data[key]["right"], data[key]["wrong"] = 0, 0, 0
+                jsonfile.seek(0)
+                json.dump(data, jsonfile)
+                jsonfile.truncate()
 
 class QnA(object):
     """ Frage und Antwort(inkl. regex) + counter  """
