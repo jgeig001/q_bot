@@ -260,4 +260,13 @@ class SofHandler(CommandHandler):
         super().__init__(bot, user)
 
     def handle(self, msg):
-        self._bot.sendMessage(self._user, "Not implemented yet.😬")
+        try:
+            # cutting cmd off && remove question mark at the and if existing
+            striped = re.search(r'(?!=/sof) .*[^?]', msg).group()
+            # build link
+            link = "https://stackoverflow.com/search?q=" + "+".join(striped.split())
+            print("link: ", link)
+            self._bot.sendMessage(self._user, link)
+        except BaseException as e:
+            print(e)
+            self._bot.sendMessage(self._user, "Something went wrong. Try again!😬")
