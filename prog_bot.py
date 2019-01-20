@@ -39,9 +39,6 @@ event = None
 
 def on_question_alarm(dict):
     """ function get called regularly by scheduler """
-    print("on_question_alarm(event):", dict)
-    print("queue:", bot.scheduler._eventq)
-    print("len(queue)", len(bot.scheduler._eventq))
     global event
     if meta.is_night():
         try:
@@ -98,6 +95,7 @@ def on_chat_message(msg):
         event = bot.scheduler.event_later(delay, {'_question_alarm': any_data})
         if _verbose: print("set_timer({})".format(delay))
     if len(bot.scheduler._eventq) > 3:
+        print("To many(>3) Events in Queue?!")
         raise RuntimeWarning("To many(>3) Events in Queue?!")
 
 
@@ -138,6 +136,7 @@ def cleanUp():
     q_man.saveValues()
 
 
+# needed to fix urllib3 issue
 def always_use_new(req, **user_kw):
     return None
 
@@ -151,7 +150,7 @@ if __name__ == "__main__":
 
     t = bot.router.routing_table['_question_alarm'] = on_question_alarm
 
-    #hack
+    # urllib3-fix
     telepot.api._pools = {
         'default': urllib3.PoolManager(num_pools=3, maxsize=10, retries=6, timeout=30),
     }
