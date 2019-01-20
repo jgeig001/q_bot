@@ -14,7 +14,7 @@ class MetaData(object):
         self._bugreport = bugreport
         self._sleeps = False
         self._msg_id_last_InlineKeyboard = None
-        self._question_frequency_min = 0.25
+        self._question_frequency_min = 17.0
 
     def token(self):
         return self._token
