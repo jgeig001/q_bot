@@ -16,12 +16,19 @@ Skript starten:
     pyhon3 prog_bot.py _TOKEN_ _USER_ _SOURCE_JSON_
 
 @startdate: 10.12.2018
-@version: 0.96
-@author: Jonathan Geiger    
+@version: 1.0
+@author: Jonathan Geiger
+@date: 20.01.2019
 """
 
+__version__ = '1.0'
+__author__ = 'Jonathan Geiger'
+__date__ = '2019/01/20'
+__description__ = """Hallo,
+ich bin der prog_bot und stelle dir regelmäßig ein paar Fragen.
+Das Skript ist aktuell nur für einen Anwender ausgelegt."""
+
 _verbose = True
-_version = 0.96
 
 #args
 TOKEN = sys.argv[1]
