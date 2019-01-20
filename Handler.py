@@ -31,8 +31,9 @@ class Handler(object):
                              'stats': StatsHandler(self._bot, self._user, self._q_man),
                              'keyboard': KeyboardHandler(self._bot, self._user),
                              'bugreport': BugreportHandler(self._bot, self._user, self._meta),
-                             'create': CreateHandler(self._bot, self._user),
-                             'cycle': CycleHandler(self._bot, self._user, self._meta)}
+                             'create': CreateHandler(self._bot, self._user, self._q_man),
+                             'cycle': CycleHandler(self._bot, self._user, self._meta),
+                             'sof': SofHandler(self._bot, self._user)}
 
     def handle(self, msg):
         """
@@ -118,8 +119,8 @@ Sonst gibts noch fogende Befehle:
 /stats - ein paar Statistiken
 /bugreport - einen Fehler melden
 /create - eine Frage hinzufuegen
-/sof - sucht in StackOverlFlow
 /cycle - wie oft(Minuten) soll gefragt werden
+/sof - sucht in StackOverlFlow
 """
 
     def handle(self, msg):
@@ -222,11 +223,20 @@ class BugreportHandler(CommandHandler):
 
 
 class CreateHandler(CommandHandler):
-    def __init__(self, bot, user):
-        super().__init__(bot, user)
+    def __init__(self, bot, user, q_man):
+        super().__init__(bot, user, q_man)
 
     def handle(self, msg):
-        self._bot.sendMessage(self._user, "Not implemented yet😬")
+        valid = re.match(r'/create ".+" ".+" ".+"$', msg)
+        if msg == "/create" or not valid:
+            s = "Mit /create kannst du neue Fragen erstellen.\n" \
+                "Gib das ganze folgendermaßen an:\n" \
+                "/create \"frage\" \"antwort\" \"regEx\" "
+            self._bot.sendMessage(self._user, s)
+        if valid:
+            _, question, answer, regEx = msg.split()
+            self._q_man.addQuestion(question, answer, regEx)
+            self._bot.sendMessage(self._user, "Ich habe deine Frage aufgenommen!👍")
 
 
 class CycleHandler(CommandHandler):
@@ -243,3 +253,11 @@ class CycleHandler(CommandHandler):
             s = "aktuell: {}min\nWillst du sie ändern gibt eine Zahl an: z.B. /cycle 3.14".format(
                 self._meta.question_frequency_sec() / 60)
             self._bot.sendMessage(self._user, s)
+
+
+class SofHandler(CommandHandler):
+    def __init__(self, bot, user):
+        super().__init__(bot, user)
+
+    def handle(self, msg):
+        self._bot.sendMessage(self._user, "Not implemented yet.😬")

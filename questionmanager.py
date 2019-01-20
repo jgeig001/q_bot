@@ -119,12 +119,17 @@ class QuestionManager(object):
         """ vor Beendigung des Programms werden die counter im jsonFile gesichert """
         with open(self.path, 'r+') as jsonfile:
             data = json.load(jsonfile)
-            for obj in self.qna_lis:
-                key = obj.question
-                data[key]["answered"], data[key]["right"], data[key]["wrong"] = obj.answered, obj.right, obj.wrong
-                jsonfile.seek(0)
-                json.dump(data, jsonfile)
-                jsonfile.truncate()
+            for qna in self.qna_lis:
+                key = qna.question
+                try:
+                    data[key]["answered"], data[key]["right"], data[key]["wrong"] = qna.answered, qna.right, qna.wrong
+                except KeyError:
+                    # mit /create hinzugefuegte Fragen werden in json geschrieben
+                    data[key] = {"answer": qna.answer, "regex": qna.regex,
+                                 "answered": qna.answered, "right": qna.right, "wrong": qna.wrong}
+                    jsonfile.seek(0)
+                    json.dump(data, jsonfile)
+                    jsonfile.truncate()
 
     def resetValues(self):
         """ überschreibt im .json alle counter(answered, right, wrong) mit 0 """
@@ -136,6 +141,11 @@ class QuestionManager(object):
                 jsonfile.seek(0)
                 json.dump(data, jsonfile)
                 jsonfile.truncate()
+
+    def addQuestion(self, question, answer, regEx):
+        """ adding a question with answer and regEx; the question is instantly available """
+        new = QnA(question, answer, regEx)
+        self.qna_lis.append(new)
 
 class QnA(object):
     """ Frage und Antwort(inkl. regex) + counter  """
