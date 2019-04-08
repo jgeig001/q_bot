@@ -1,15 +1,20 @@
 {
+  "id": 3,
   "bugs": [
     {
       "description": "bugreport_test",
-      "date": "2018-12-15 22:54:01.649510",
-      "id": 1
+      "id": 1,
+      "date": "2018-12-15 22:54:01.649510"
     },
     {
       "description": "Die erste Frage nach Serverstart ist immer(?) falsch.",
-      "date": "2018-12-18 19:18:04.665051",
-      "id": 2
+      "id": 2,
+      "date": "2018-12-18 19:18:04.665051"
+    },
+    {
+      "description": "Statistiken werden nicht richtig gespeichert!!!",
+      "id": 3,
+      "date": "2019-04-08 20:17:55.575313"
     }
-  ],
-  "id": 2
+  ]
 }

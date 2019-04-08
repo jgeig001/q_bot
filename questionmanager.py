@@ -111,25 +111,29 @@ class QuestionManager(object):
         answered = reduce(lambda r, cur: r + cur, [qna.answered for qna in self.qna_lis], 0)
         right = reduce(lambda r, cur: r + cur, [qna.right for qna in self.qna_lis], 0)
         wrong = reduce(lambda r, cur: r + cur, [qna.wrong for qna in self.qna_lis], 0)
-        s = "{} Fragen beantwortet\n{}-mal richt gelegen({:.2f}%)\n{}-mal falsch({:.2f}%)"
-        s = s.format(answered, right, (right / answered) * 100, wrong, (wrong / answered) * 100)
-        return s
+        s = "{} Antworten gegeben\n{}-mal richt gelegen({:.2f}%)\n{}-mal falsch({:.2f}%)"
+        try:
+            return s.format(answered, right, (right / answered) * 100, wrong, (wrong / answered) * 100)
+        except ZeroDivisionError:
+            return s.format(0, 0, 0, 0, 0)
 
     def saveValues(self):
         """ vor Beendigung des Programms werden die counter im jsonFile gesichert """
         with open(self.path, 'r+') as jsonfile:
             data = json.load(jsonfile)
             for qna in self.qna_lis:
+                # frage ^= schluessel
                 key = qna.question
                 try:
                     data[key]["answered"], data[key]["right"], data[key]["wrong"] = qna.answered, qna.right, qna.wrong
                 except KeyError:
-                    # mit /create hinzugefuegte Fragen werden in json geschrieben
+                    print("#except KeyError:")
+                    # mit /create von Nutzer neu hinzugefuegte Fragen werden in json geschrieben
                     data[key] = {"answer": qna.answer, "regex": qna.regex,
                                  "answered": qna.answered, "right": qna.right, "wrong": qna.wrong}
-                    jsonfile.seek(0)
-                    json.dump(data, jsonfile)
-                    jsonfile.truncate()
+                jsonfile.seek(0)
+                json.dump(data, jsonfile)
+                jsonfile.truncate()
 
     def resetValues(self):
         """ überschreibt im .json alle counter(answered, right, wrong) mit 0 """
@@ -161,7 +165,7 @@ class QnA(object):
     def evaluate(self, given_answer):
         """ prueft gegebene Antwort und aktualisiert counter """
         self.answered += 1
-        if re.match(pattern=self.regex, string=given_answer):
+        if re.match(pattern=self.regex, string=given_answer, flags=re.IGNORECASE):
             self.right += 1
             return True
         self.wrong += 1

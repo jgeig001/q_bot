@@ -1,3 +1,3 @@
-# prog_bot
+# q_bot
 
-TelegramBot that asks regularly some Questions.
+This TelegramBot can regularly ask you some questions.

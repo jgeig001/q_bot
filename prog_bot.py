@@ -9,7 +9,7 @@ import telepot.api, urllib3
 
 """
 Hallo,
-ich bin der prog_bot und stelle dir regelmäßig ein paar Fragen.
+ich bin der q_bot und stelle dir regelmäßig ein paar Fragen.
 Das Skript ist aktuell nur für einen Anwender ausgelegt.
 
 Skript starten:
@@ -18,14 +18,14 @@ Skript starten:
 @startdate: 10.12.2018
 @version: 1.0
 @author: Jonathan Geiger
-@date: 20.01.2019
+@date: 08.04.2019
 """
 
-__version__ = '1.0'
+__version__ = '1.01'
 __author__ = 'Jonathan Geiger'
-__date__ = '2019/01/20'
+__date__ = '2019/04/08'
 __description__ = """Hallo,
-ich bin der prog_bot und stelle dir regelmäßig ein paar Fragen.
+ich bin der q_bot und stelle dir regelmäßig ein paar Fragen.
 Das Skript ist aktuell nur für einen Anwender ausgelegt."""
 
 _verbose = True
@@ -111,7 +111,7 @@ def on_callback_query(msg):
     if _verbose: print(msg)
     query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
 
-    if query_data == 'spicker_1':
+    if query_data == 'cheat_1':
 
         # Helfen
         bot.answerCallbackQuery(query_id, text=q_man.cur_answer())  # dropdown on top
@@ -121,7 +121,7 @@ def on_callback_query(msg):
         except TelegramError:
             pass
 
-    elif query_data == "spicker_0":
+    elif query_data == "cheat_0":
 
         # NICHT helfen
         bot.answerCallbackQuery(query_id, text="ok")  # dropdown on top
@@ -130,7 +130,6 @@ def on_callback_query(msg):
             bot.deleteMessage(msg_identifier=meta.msg_id_last_InlineKeyboard())
         except TelegramError:
             pass
-
 
 
 def cleanUp():
@@ -150,6 +149,7 @@ def always_use_new(req, **user_kw):
 
 if __name__ == "__main__":
 
+    # PREPARATION
     bot = telepot.Bot(TOKEN)
 
     # create Handler
@@ -163,9 +163,14 @@ if __name__ == "__main__":
     }
     telepot.api._which_pool = always_use_new
 
+    # START
+
+    # send welcome-message
+    on_chat_message({'text': "/start"})
     # first Question
     bot.sendMessage(USER, q_man.next_question())
 
+    # message-loop
     try:
         bot.message_loop({'chat': on_chat_message,
                           'callback_query': on_callback_query,

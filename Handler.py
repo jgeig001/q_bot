@@ -5,11 +5,9 @@ from telepot.namedtuple import ReplyKeyboardMarkup
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 from datetime import datetime
 
-
 """
 Hier wird sich um das Abarbeiten der eingehenden Nachrichten gekümmert.
 """
-
 
 class Handler(object):
     def __init__(self, bot, question_manager, meta_data):
@@ -41,6 +39,9 @@ class Handler(object):
         :return True, wenn frage mit msg richtig beantwortet wurde, sonst False
         """
 
+        # command: IGNORECASE(/CmD foo -> /cmd foo)
+        re.sub("/[a-zA-Z]+", msg.split()[0].lower(), msg)
+
         # when I SLEEP...(zzz)
         if self._meta.sleeps():
             if msg.startswith("/wakeup"):
@@ -68,7 +69,7 @@ class Handler(object):
                 except BaseException as e:
                     print("evaluation failed"); print(e)
                     self._bot.sendMessage(self._user, "Kann Antwort nicht evaluieren. Ist aber mein Fehler ;)"
-                                          "\n Also weiter gehts:...(/next)")
+                                          "\n Also weiter gehts...(/next)")
                     return
                 # richtige Antwort
                 if correct:
@@ -80,8 +81,8 @@ class Handler(object):
                     if self._q_man.get_fail_counter() >= 3:
                         # -> Hilfe
                         markup = InlineKeyboardMarkup(inline_keyboard=[
-                            [InlineKeyboardButton(text="Ja", callback_data="spicker_1")],
-                            [InlineKeyboardButton(text="Nein", callback_data="spicker_0")],
+                            [InlineKeyboardButton(text="Ja", callback_data="cheat_1")],
+                            [InlineKeyboardButton(text="Nein", callback_data="cheat_0")],
                         ])
 
                         sent = self._bot.sendMessage(self._user, text="Willst du spicken?", reply_markup=markup)
@@ -108,7 +109,7 @@ class CommandHandler(object):
 class StartHandler(CommandHandler):
     def __init__(self, bot, user):
         super().__init__(bot, user)
-        self._start_msg = """Ich stelle Fragen, Du beantwortest
+        self._start_msg = """Ich stelle Fragen, Du beantwortest.
 Sonst gibts noch fogende Befehle:
 
 /next - Frage überspringen
@@ -234,8 +235,9 @@ class CreateHandler(CommandHandler):
                 "/create \"frage\" \"antwort\" \"regEx\" "
             self._bot.sendMessage(self._user, s)
         if valid:
-            _, question, answer, regEx = msg.split()
-            self._q_man.addQuestion(question, answer, regEx)
+            print(re.split('"[.+?]"', msg))
+            question, answer, regEx = re.findall('".+?"', msg)
+            self._q_man.addQuestion(question[1:-1], answer[1:-1], regEx[1:-1])
             self._bot.sendMessage(self._user, "Ich habe deine Frage aufgenommen!👍")
 
 

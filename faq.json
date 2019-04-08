@@ -1,324 +1,37 @@
 {
-  "Mit welcher C-Fkt kann man 'Strings' anhand von Trennzeichen zerteilen?": {
+  "Wie viele Meter hat ein Kilometer?": {
+    "answer": "1000",
+    "right": 0,
     "answered": 0,
-    "wrong": 0,
-    "answer": "strtok()",
-    "regex": "strtok[(][)]",
-    "right": 0
+    "regex": "1000",
+    "wrong": 0
   },
-  "Wie l\u00f6sche ich das n-te Element einer Liste(lst)?()Python": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "del lst[n]",
-    "regex": "del lst[[]n[]]",
-    "right": 0
-  },
-  "Wie bekomme ich den Datentyp von x?(Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "type(x)",
-    "regex": "type[(]x[)]",
-    "right": 0
-  },
-  "Was macht die Funktion all()?(Python) returns...": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "True, wenn alle True, sonst False",
-    "regex": "True, wenn alle True, sonst False",
-    "right": 0
-  },
-  "Wie kann man mit char *ptr einen 'String' durchlaufen?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "while(*ptr) {ptr++;}",
-    "regex": "while[(][*]ptr[)](\\s)?{(\\s)?ptr[+]{2};(\\s)?}",
-    "right": 0
-  },
-  "Wie bekomme ich aus s = 'Foo' -> 'foo'(in Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "s.lower()",
-    "regex": "s[.]lower[(][)]",
-    "right": 0
-  },
-  "Wie bekommt man eine Kopie einer Liste(lst)?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "lst[:]",
-    "regex": "(?=.*lst[[]:[]])",
-    "right": 0
-  },
-  "Was ist die beste Programmiersprache der Welt?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "Python",
-    "regex": "(P|p)(Y|y)(T|t)(H|h)(O|o)(N|n)",
-    "right": 0
-  },
-  "Welche 4 Haupt-Funktionen werden in Python f\u00fcr RegEx angeboten": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "match(), search(), findall(), split()",
-    "regex": "(?=.*match[(][)])(?=.*search[(][)])(?=.*findall[(][)])(?=.*split[(][)])",
-    "right": 0
-  },
-  "Wie splitte ich einen String(s) nach 2(multiple) Speratoren, z.B.  -  und  :  ?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "re.split('-', ':', s)",
-    "regex": "re[.]split[(]'-',(\\s)?':',(\\s)?s[)]",
-    "right": 0
-  },
-  "Wie kann ich in Python eine Liste(lst) mit n Elementen umdrehen": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "lst[::-1]",
-    "regex": "(?=.*lst[[]::-1[]])",
-    "right": 0
-  },
-  "Wie bekomme ich aus s = 'Foo' -> 'FOO'(in Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "s.upper()",
-    "regex": "s[.]upper[(][)]",
-    "right": 0
-  },
-  "How to read two lines at once in Python? with open('./dat.txt') as file:\n": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "while True:\\s+[\\w]*+ = file.readline()\\s+[^\\2]+ = file.readline()\\s+if not \\2|\\4: break",
-    "regex": "while True:\\s+[\\w]*+ = file[.]readline()\\s+[^\\2]+ = file[.]readline()\\s+if not \\2|\\4: break",
-    "right": 0
-  },
-  "Welches package bietet toll Funktionen zum Iterieren an?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "itertools",
-    "regex": "itertools",
-    "right": 0
-  },
-  "Wie rufe ich den init() der Superklasse auf?(Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "super().__init__()",
-    "regex": "(?=.*super[(][)][.]__init__[(][)])",
-    "right": 0
-  },
-  "Wie bekomme ich den Index von c='c' im String s='abcdefg'?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "s.find(c) oder index(c)",
-    "regex": "s[.]find[(]c[)]|s[.]index[(]c[)]",
-    "right": 0
-  },
-  "Wie bekomme ich den Index von 'two' in lst['one', 'two', 'three'](Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "lst.index('two')",
-    "regex": "(lst[.]index[(]'two'[)])|(lst[.]find[(]'two'[)])",
-    "right": 0
-  },
-  "Wie kann ich pr\u00fcfen, ob 'obj' ein Iterable ist?(Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "isinstance(obj, collections.Iterable)",
-    "regex": "(?=.*isinstance[(]obj,(\\s)?collections[.]Iterable[)])",
-    "right": 0
-  },
-  "Wie h\u00e4nge ich a an lst vorne an?(Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "lst = [a] + lst",
-    "regex": "lst(\\s)?=(\\s)?[[]a[]](\\s)?[+](\\s)?lst",
-    "right": 0
-  },
-  "Wie kann man das kartesische Produkt(allesXallem) erzeugen(2Varianten m\u00f6glich)? lis1 und lis2 -> (a,b)-Tupel": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "[(a,b) for a in lis1 for b in lis2]\noder\nitertools.product(lis1, lis2)",
-    "regex": "([[][(]a,b[)] for a in lis1 for b in lis2[]])|(itertools.product[(]lis1, lis2[)])",
-    "right": 0
-  },
-  "Mit welcher C-Fkt kann man nach dem letzten Auftreten eines character in einem 'String' suchen?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "strrchr()",
-    "regex": "strrchr[(][)]",
-    "right": 0
-  },
-  "Wie bekomme ich x=3 in die Mitte von lst[1,2,4,5] eingefuegt?(Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "lst.insert(2, x)",
-    "regex": "lst[.]insert[(]2,(\\s)?x[)]",
-    "right": 0
-  },
-  "Wie bekomme ich eine range von 100,99,98,...,2,1 ?(Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "range(100, 0, -1)",
-    "regex": "range[(]100,(\\s)?0,(\\s)?-1[)]",
-    "right": 0
-  },
-  "Wie bekomme ich in C den uppercase vom char c?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "toupper(c)",
-    "regex": "toupper[(]c[)]",
-    "right": 0
-  },
-  "Wie kann ich die Werte der Variablen a und b vertauschen?(Python)": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "a,b = b,a",
-    "regex": "a(\\s)?,(\\s)?b(\\s)?=(\\s)?b(\\s)?,(\\s)?a",
-    "right": 0
-  },
-  "Wie bekome ich aus lst=[1,2,3,3,4,1,5,6,7,6] alle doppelten Elemente raus?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "list(set(lst))",
-    "regex": "list[(]set[(]lst[)][)]",
-    "right": 0
-  },
-  "Wie bekomme ich das erste und letzte Element einer Liste(lst)?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "lst[::len(lst)-1]",
-    "regex": "lst[[][:]{2}len[(]lst[)]-1[]]",
-    "right": 0
-  },
-  "Wie kann man (in C) v[n] noch ausdr\u00fccken?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "*(v+n)",
-    "regex": "[*][(]v[+]n[)]",
-    "right": 0
-  },
-  "Mit welchen builtIn-Funktionen kan man in Python Maxima und Minima bestimmen?": {
+  "Welche Farbe haben Bananen?": {
+    "answer": "Gelb",
+    "right": 1,
     "answered": 1,
-    "wrong": 0,
-    "answer": "max() und min()",
-    "regex": "(?=.*max[(][)])(?=.*min[(][)])",
-    "right": 1
+    "regex": "Gelb",
+    "wrong": 0
   },
-  "Wie kann man (in C) a->attr noch ausdr\u00fccken?": {
+  "Welche ist die beste Programmiersprache der Welt?": {
+    "answer": "Python",
+    "right": 0,
     "answered": 0,
-    "wrong": 0,
-    "answer": "(*a).attr",
-    "regex": "[(][*]a[)][.]attr",
-    "right": 0
+    "regex": "Python",
+    "wrong": 0
   },
-  "Wie kann man ein key-value-Pair({'key': 17}) aus einem dictionary(dic) löschen?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "del dic['key'] oder dic.pop('key')",
-    "regex": "del dic[[]'key'(])|dic.pop[(]'key'[)]",
-    "right": 0
+  "Wie viele Spieler hat eine Fussballmanschaft?": {
+    "answer": "11",
+    "right": 1,
+    "answered": 7,
+    "regex": "11",
+    "wrong": 6
   },
-  "Wie kann man zwei dictionarys(dic1, dic2) mergen?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "{**dic1, **dic2}",
-    "regex": "{\\*\\*dic1,(\\s)?\\*\\*dic2}",
-    "right": 0
-  },
-  "Wie bekomme ich mit rückwärtslaufendem slicing [3,2,1] aus [0,1,2,3,4,5]? ->[x:y:-1]": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "[3:0:-1]",
-    "regex": "[[]3:0:-1]",
-    "right": 0
-  },
-  "Mit welcher Funktion kann ich eine Liste mit Zahlen einfach kumulieren": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "sum",
-    "regex": "sum.*",
-    "right": 0
-  },
-  "Wie instanziiert man in C einen überschreibbaren String(s)?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "char s[] = \"test string\"; oder mit malloc() und strcpy()",
-    "regex": "char s[[][]](\\s)?=(\\s)?\".+\";",
-    "right": 0
-  },
-  "Mit welcher Funktion kann man in Pathon zahlen addieren?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "sum() oder reduce()",
-    "regex": "sum\\(\\)|reduce\\(\\)",
-    "right": 0
-  },
-  "Nach welchem Parameter wird ein dictionary defaultmäßig sortiert": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "nach key",
-    "regex": "(nach )?key",
-    "right": 0
-  },
-  "Woran muss man bei einelementigen Tupeln denken?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "trailing comma",
-    "regex": "trailing comma",
-    "right": 0
-  },
-  "Wie kann ich ein dictionary(dic) updaten(=17), ohne wissen zu müssen, ob der key('a') schon existiert?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "dic['a'] = setdefault('a', 17)",
-    "regex": "dic\\['a'\\](\\s)?=(\\s)?setdefault\\('a', 17\\)",
-    "right": 0
-  },
-  "Wie bekomme ich die Schnittmenge von set1 und set2?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "set1 & set2",
-    "regex": "set1(\\s)?&(\\s)?set2|set2(\\s)?&(\\s)?set1",
-    "right": 0
-  },
-  "Was geben re.findall() und re.split() zurück?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "eine Liste",
-    "regex": "(eine )?Liste",
-    "right": 0
-  },
-  "Was macht der Backslash bei regEx?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "hebt besondere Bedeutung auf",
-    "regex": "hebt besondere Bedeutung auf",
-    "right": 0
-  },
-  "Wie kann man bei regEx \\w noch angeben?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "[a-zA-Z0-9]",
-    "regex": "\\[a-zA-Z0-9]",
-    "right": 0
-  },
-  "Wie kann ich ein dictionary(dic) nach values sortieren?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "sorted(dic.items(), key=lambda kv: kv[1])",
-    "regex": "sorted\\(dic.items\\(\\),(\\s)?key=lambda kv:(\\s)?kv\\[1\\]\\)",
-    "right": 0
-  },
-  "Wie bekomme ich in C aus dem char (c = 'x') den uppercase('X')?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "toupper(c)",
-    "regex": "toupper\\(c\\)",
-    "right": 0
-  },
-  "Wie kann ich in C eine globale Variable mit dem Wert 17 instanziieren?": {
-    "answered": 0,
-    "wrong": 0,
-    "answer": "#define LEN 17",
-    "regex": "#define [a-zA-Z]+ 17",
-    "right": 0
+  "Auf welchem Kontinent liegt Deutschland?": {
+    "answer": "Europa",
+    "right": 1,
+    "answered": 2,
+    "regex": "Europa",
+    "wrong": 1
   }
 }
