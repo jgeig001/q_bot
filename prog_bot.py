@@ -5,7 +5,8 @@ from questionmanager import QuestionManager
 from Handler import Handler
 from MetaData import MetaData
 # hack
-import telepot.api, urllib3
+import telepot.api
+import urllib3
 
 """
 Hallo,
@@ -30,10 +31,11 @@ Das Skript ist aktuell nur für einen Anwender ausgelegt."""
 
 _verbose = True
 
-#args
+# args
 TOKEN = sys.argv[1]
+# use findout_userID.py to find out this parameter
 USER = sys.argv[2]
-SOURCE_JSON = sys.argv[3]
+SOURCE_JSON = sys.argv[3]  # file with questions&answers
 BUGREPORT_JSON = "bugreport.json"
 
 # global variables
@@ -180,4 +182,3 @@ if __name__ == "__main__":
         pass
     finally:
         cleanUp()
-

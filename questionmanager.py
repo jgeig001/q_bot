@@ -1,7 +1,8 @@
-import json, re
-from random import gauss, randint
+import json
+import re
 from enum import Enum
 from functools import reduce
+from random import gauss, randint
 
 # states
 states = Enum("States", "NOTHING_ASKED STILL_OPEN ANSWERED_CORRECTLY")
